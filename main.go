@@ -81,21 +81,17 @@ func Calc(numOne, numTwo int, operator string) (int, error) {
 	switch operator {
 	case "+":
 		result = numOne + numTwo
-		return result, nil
 	case "-":
 		result = numOne - numTwo
-		return result, nil
 	case "*":
 		result = numOne * numTwo
-		return result, nil
 	case "/":
 		if numTwo != 0 {
 			result = numOne / numTwo
-			return result, nil
 		} else {
 			err := errors.New("Делить на 0 нельзя")
 			return 0, err
 		}
 	}
-	return 0, nil
+	return result, nil
 }
