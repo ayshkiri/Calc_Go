@@ -10,17 +10,7 @@ import (
 )
 
 func RomanToInteger(romanNumber string) (int, error) {
-	var romanNumbers = make(map[string]int)
-	romanNumbers["I"] = 1
-	romanNumbers["II"] = 2
-	romanNumbers["III"] = 3
-	romanNumbers["IV"] = 4
-	romanNumbers["V"] = 5
-	romanNumbers["VI"] = 6
-	romanNumbers["VII"] = 7
-	romanNumbers["VIII"] = 8
-	romanNumbers["IX"] = 9
-	romanNumbers["X"] = 10
+	romanNumbers := map[string]int{"I": 1, "II": 2, "III": 3, "IV": 4, "V": 5, "VI": 6, "VII": 7, "VIII": 8, "IX": 9, "X": 10}
 	if romanNumbers[romanNumber] != 0 {
 		return romanNumbers[romanNumber], nil
 	} else {
@@ -68,11 +58,12 @@ func main() {
 	}
 	romanNumberOne, errRomanNumberOne := RomanToInteger(inputStrArray[0])
 	romanNumberTwo, errRomanNumberTwo := RomanToInteger(inputStrArray[2])
-	if errRomanNumberOne == nil && errRomanNumberTwo == nil && romanNumberOne > romanNumberTwo {
+	if errRomanNumberOne == nil && errRomanNumberTwo == nil && (inputStrArray[1] != "-" || romanNumberOne > romanNumberTwo) {
 		romanResult, _ := Calc(romanNumberOne, romanNumberTwo, inputStrArray[1])
 		fmt.Println(IntegerToRoman(romanResult))
 		return
 	}
+	// Расписать вывод каждой ошибки???
 	fmt.Println("Некорректные входные данные")
 }
 
