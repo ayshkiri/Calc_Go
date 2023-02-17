@@ -38,20 +38,24 @@ func main() {
 	inputData = strings.Trim(inputData, "\n")
 	var inputStrArray []string = strings.Split(inputData, " ")
 	if len(inputStrArray) != 3 {
+		// Проверка, что введены три значения через пробел
 		fmt.Println("Некорректные входные данные")
 		return
 	}
 	operators := map[string]int{"+": 1, "-": 1, "*": 1, "/": 1}
 	_, check := operators[inputStrArray[1]]
 	if !check {
+		// Проверка, что "среднее" значение является оператором
 		fmt.Println("Некорректные входные данные")
 		return
 	}
 	numberOne, errNumberOne := strconv.Atoi(inputStrArray[0])
 	numberTwo, errNumberTwo := strconv.Atoi(inputStrArray[2])
 	if errNumberOne == nil && errNumberTwo == nil && numberOne >= 1 && numberOne <= 10 && numberTwo >= 1 && numberTwo <= 10 {
+		// Проверка, что введенные операнды являются арабскими числами от 1 до 10 включительно.
+
 		// Возвращаемая функцией Calc ошибка пропускается, т.к. в условии выше уже есть проверка,
-		// что передаваемые аргументы больше 0
+		// что передаваемые числа больше 0
 		arabicResult, _ := Calc(numberOne, numberTwo, inputStrArray[1])
 		fmt.Println(arabicResult)
 		return
@@ -59,11 +63,13 @@ func main() {
 	romanNumberOne, errRomanNumberOne := RomanToInteger(inputStrArray[0])
 	romanNumberTwo, errRomanNumberTwo := RomanToInteger(inputStrArray[2])
 	if errRomanNumberOne == nil && errRomanNumberTwo == nil && (inputStrArray[1] != "-" || romanNumberOne > romanNumberTwo) {
+		// Проверка, что введенные операнды являются римскими числами от 1 до 10 включительно,
+		// и что для оператора "-" первое число больше второго.
 		romanResult, _ := Calc(romanNumberOne, romanNumberTwo, inputStrArray[1])
 		fmt.Println(IntegerToRoman(romanResult))
 		return
 	}
-	// Расписать вывод каждой ошибки???
+	// Все остальные вариации считаем некорректными
 	fmt.Println("Некорректные входные данные")
 }
 
